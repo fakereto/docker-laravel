@@ -1,4 +1,4 @@
-FROM fakereto/nginx-fpm:14-php-7.3
+FROM neubox/phpnginx:latest
 LABEL maintainer="Andres Vejar <andresvejar@neubox.net>"
 
 ENV NJS_VERSION=1.14.0.0.2.0-1~stretch \
@@ -72,6 +72,8 @@ ENV APP_NAME=Laravel \
     QUEUE_CONNECTION=sync \
     LOG_CHANNEL=stdout \
     LOG_SLACK_WEBHOOK_URL=NONE
+# Many more ENV may be needed here, and updated in docker-phpfpm-entrypoint file
+COPY ./config/app.conf ${NGINX_CONF_DIR}/sites-enabled/app.conf
 
 # copy in app code as late as possible, as it changes the most
 COPY docker-laravel-entrypoint.sh /var/www/
