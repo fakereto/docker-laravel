@@ -72,6 +72,8 @@ ENV APP_NAME=Laravel \
     QUEUE_CONNECTION=sync \
     LOG_CHANNEL=stdout \
     LOG_SLACK_WEBHOOK_URL=NONE
+# Many more ENV may be needed here, and updated in docker-phpfpm-entrypoint file
+COPY ./config/app.conf ${NGINX_CONF_DIR}/sites-enabled/app.conf
 
 # copy in app code as late as possible, as it changes the most
 COPY docker-laravel-entrypoint.sh /var/www/
